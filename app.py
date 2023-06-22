@@ -11,8 +11,8 @@ from langchain.embeddings import OpenAIEmbeddings
 # Configuration de l'API OpenAI
 openai.api_type = "azure"
 openai.api_version = "2023-03-15-preview"
-openai.api_base = os.environ["OPENAI_API_BASE"] = "https://innoopenai.openai.azure.com/"
-openai.api_key = os.environ["OPENAI_API_KEY"] = "3011552ef9a44979acfa2639ee13b6b8"
+openai.api_base = os.environ["OPENAI_API_BASE"] = "https://xxxxxx.openai.azure.com/"
+openai.api_key = os.environ["OPENAI_API_KEY"] = "xxxxxxxx"
 
 # set context window
 context_window = 2048
