@@ -1,18 +1,31 @@
-import os
-import openai
 import AzureOpenAIRequest
 import AzureOpenAIResponse
+import os
+import openai
 import json
+import pymongo
 from flask import Flask, request
-from llama_index import GPTVectorStoreIndex, StorageContext, ServiceContext, LLMPredictor, LangchainEmbedding, Prompt, set_global_service_context, load_index_from_storage
 from langchain.chat_models import AzureChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings
+from llama_index import (
+    StorageContext,
+    ServiceContext,
+    SimpleDirectoryReader,
+    LLMPredictor,
+    LangchainEmbedding,
+    Prompt,
+    set_global_service_context,
+    )
+from llama_index.indices.vector_store.base import VectorStoreIndex
+from llama_index.vector_stores.mongodb import MongoDBAtlasVectorSearch
 
 # Configuration de l'API OpenAI
+# Enlever les os.environ si déploiment sur azure et rajouter les valeurs
 openai.api_type = "azure"
 openai.api_version = "2023-03-15-preview"
 openai.api_base = os.environ["OPENAI_API_BASE"] = "https://xxxxxx.openai.azure.com/"
-openai.api_key = os.environ["OPENAI_API_KEY"] = "xxxxxxxx"
+openai.api_key = os.environ["OPENAI_API_KEY"] = "xxxxxxxxxxxxx"
+mongo_uri = os.environ["MONGO_URI"] = "mongodb+srv://xxxxxxxxx:xxxxxxx@indexatlasdb.vwrbmy3.mongodb.net/index?retryWrites=true&w=majority"
 
 # set context window
 context_window = 2048
@@ -21,7 +34,7 @@ num_output = 512
 
 # Modèles de déploiment
 
-models = ["test1"]
+models = ["default"]
 
 # Index existants
 
@@ -31,8 +44,8 @@ existing_index = ["DTU", "ISO", "RS"]
 embedding_llm = LangchainEmbedding(
     OpenAIEmbeddings(
         model="text-embedding-ada-002",
-        deployment="ada-test",
-        openai_api_key= openai.api_key,
+        deployment="learning",
+        openai_api_key=openai.api_key,
         openai_api_base=openai.api_base,
         openai_api_type=openai.api_type,
         openai_api_version=openai.api_version,
@@ -189,17 +202,26 @@ def get_json():
 
     dossier = requestDTO.Index
 
-    if dossier is None:
-        dossier = "DTU"
+    # Initialisation des paramètres pour les requètes sur MongoDB Atlas
 
-    if os.path.exists(f"./Index/{dossier}"):
-        storage_context = StorageContext.from_defaults(persist_dir=f"./Index/{dossier}")
-        index = load_index_from_storage(storage_context)
-        print((f"Chargement terminé de l'index  {dossier} depuis le stockage avec {len(index.docstore.docs)} nodes.")), 200
-    else:
-        responseDTO = AzureOpenAIResponse.AzureOpenAIResponseDTO(True, "Veuillez inserer un nom de dossier existant dans le fichier JSON", None)
-        return generate_response_and_dispose(requestDTO, responseDTO), 400
-    
+    mongodb_client = pymongo.MongoClient(mongo_uri)
+    db_name = f"{dossier}"
+    store = MongoDBAtlasVectorSearch(mongodb_client, db_name=db_name)
+
+
+    # Création ou mise à jour d'un index à partir de documents dans le dossier 'Sources'
+    # A commenter/décommenter si on veut créer ou mettre à jour un index
+
+    # storage_context = StorageContext.from_defaults(vector_store=store)
+    # docs = SimpleDirectoryReader("./Sources").load_data()
+    # index = VectorStoreIndex.from_documents(docs, storage_context=storage_context)
+
+
+    # Initialisation de l'index via les index sur MongoDB Atlas
+    # Et inversement, commenter/décommenter si on veut juste query l'index existant
+
+    index = VectorStoreIndex.from_vector_store(store)
+
     # Template du system prompt définissant le comprtement du LLM)
 
     qa_template = Prompt(requestDTO.get_system_template())
