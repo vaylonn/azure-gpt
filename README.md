@@ -2,7 +2,7 @@
 
 Ce programme est un serveur Flask connecté à une webapp Azure qui implémente une API pour effectuer des requêtes de génération de texte en utilisant un modèle de déploiement Azure de l'API OpenAI. Le serveur est capable de répondre à des requêtes POST et GET à l'URL "/query". Le programme utilise également des dépendances supplémentaires pour l'indexation des documents et le traitement des réponses. Les données sont indéxées sur une base de données NoSQL: MongoDB Atlas.
 
-Se référer à la page portal OpenAi dans portal.azure.com
+Se référer à la page portal innoOpenAi dans portal.azure.com
 
 Cet outil utilise les libraires llama_index, langchain, openai, flask, json et os.
 
@@ -129,6 +129,23 @@ Il faut commenter ou décommenter une ou l'autre partie dans le code pour faire 
 
 Le prompt template définit la personnalité et comment va agir l'IA.
 Modifier le prompt template pour définir comment on veut qu'il agisse.
+
+# Route "List"
+
+Cette route liste dans un format json chaque index ainsi que son libellé et sa description.
+
+Elle est aussi protégée par un token.
+
+Elle est mise à jour à partir des trois listes: `id` `label` `descrition`
+
+# Chatbot
+
+Partie pas incluse dans le programme mais voici les liens qui permettraient de l'implémenter dans le programme (sans ordre de priorité):
+https://gpt-index.readthedocs.io/en/latest/end_to_end_tutorials/chatbots/building_a_chatbot.html
+https://gpt-index.readthedocs.io/en/latest/core_modules/query_modules/chat_engines/usage_pattern.html
+https://gpt-index.readthedocs.io/en/latest/community/integrations/using_with_langchain.html
+https://gpt-index.readthedocs.io/en/latest/examples/chat_engine/chat_engine_react.html
+https://gpt-index.readthedocs.io/en/latest/examples/chat_engine/chat_engine_context.html
 
 # Execution du programme
 
