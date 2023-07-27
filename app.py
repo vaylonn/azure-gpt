@@ -28,13 +28,13 @@ from llama_index.vector_stores.mongodb import MongoDBAtlasVectorSearch
 # Enlever les os.environ si déploiment sur azure et rajouter les valeurs
 openai.api_type = "azure"
 openai.api_version = "2023-07-01-preview"
-openai.api_base = os.environ["OPENAI_API_BASE"] = "https://iainnoopenai.openai.azure.com/"
-openai.api_key = os.environ["OPENAI_API_KEY"] = "9af128ce7fd74762aa1e1169b0adc556"
-_mongoURI = os.environ["MONGO_URI"] = "mongodb+srv://sxdinno:PasseDeMot03@indexatlasdb.vwrbmy3.mongodb.net/index?retryWrites=true&w=majority"
+openai.api_base = os.environ["OPENAI_API_BASE"] = "https://xxxxx.openai.azure.com/"
+openai.api_key = os.environ["OPENAI_API_KEY"] = "xxxxxxx"
+_mongoURI = os.environ["MONGO_URI"] = "mongodb+srv://sxdinno:xxxxxxx@indexatlasdb.vwrbmy3.mongodb.net/index?retryWrites=true&w=majority"
 
 # Token de connexion
 
-_token = "5cd59659-3ee7-4b2a-8bb4-3c646802b27b"
+_token = "xxxxxxxxx"
 
 # set context window
 
