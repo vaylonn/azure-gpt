@@ -1,0 +1,39 @@
+llama_index:
+https://gpt-index.readthedocs.io/en/latest/index.html
+
+    - logique de fonctionnement qui contient la plupart des concepts et les liens vers leurs explications: https://gpt-index.readthedocs.io/en/latest/getting_started/concepts.html
+        (plus en détail avec du code basique) https://gpt-index.readthedocs.io/en/latest/end_to_end_tutorials/usage_pattern.html
+
+    - Customisation et choix des paramètre qui conviennent (différents types d'indexations et de requête): https://gpt-index.readthedocs.io/en/latest/getting_started/customization.html
+
+    - Pour connecter d'autres types de données : https://gpt-index.readthedocs.io/en/latest/core_modules/data_modules/connector/root.html
+
+    - Intégration de MongoDB Atlas : https://gpt-index.readthedocs.io/en/latest/examples/vector_stores/MongoDBAtlasVectorSearch.html
+
+    - Différents type d'indexation (on utilise le Vector Search) (utile pour "optimiser" les réponses du programme en fonction de certains types de docs) : https://gpt-index.readthedocs.io/en/latest/core_modules/data_modules/index/index_guide.html
+
+    - Différents type d'outil de requête (même chose que pour l'index, utile pour de l'optimisation = il faut tester) : https://gpt-index.readthedocs.io/en/latest/core_modules/query_modules/query_engine/root.html
+        on utilise ça: https://gpt-index.readthedocs.io/en/latest/examples/query_engine/CustomRetrievers.html
+
+    - Infos sur l'integration des differents LLM (Azure, openai, local) : https://gpt-index.readthedocs.io/en/latest/core_modules/model_modules/llms/root.html / 
+        les differents modules de LLM disponibles : https://gpt-index.readthedocs.io/en/latest/core_modules/model_modules/llms/modules.html
+        pour Azure : https://gpt-index.readthedocs.io/en/latest/examples/llm/azure_openai.html / https://gpt-index.readthedocs.io/en/latest/examples/customization/llms/AzureOpenAI.html
+
+    - Infos sur l'embedding : https://gpt-index.readthedocs.io/en/latest/core_modules/model_modules/embeddings/root.html
+
+    - Infos sur les system_templates et les prompts : https://gpt-index.readthedocs.io/en/latest/core_modules/model_modules/prompts.html
+
+Pour des infos complémentaires sur llama_index:
+    - Discord avec devs qui répondent dans l'après-midi (ils sont aux US et très actifs) : https://discord.com/invite/dGcwcsnxhU
+        voir dans le channel "issues and help" pour trouver surment la réponse a un des problèmes sinon poser la question
+    - Compte twitter : https://twitter.com/llama_index
+
+
+MongoDB Atlas:
+https://account.mongodb.com/account/login
+
+
+lien annexes:
+https://python.langchain.com/docs/get_started/introduction.html
+
+
